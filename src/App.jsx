@@ -19,7 +19,6 @@ const FEEDBACK_FORM_URL = "#";
 const HERO_IMAGE = "/assets/screenshot-jogo.png";
 const GAMEPLAY_IMAGE = "/assets/gameplay-dois-erros.png";
 const FIRST_HINT_IMAGE = "/assets/gameplay-um-erro.png";
-const INTERACTION_IMAGE = "/assets/gameplay-interacao.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -379,21 +378,6 @@ export default function App() {
               <h2 className="font-display text-4xl font-black text-lagoon sm:text-5xl">Nossa solução</h2>
               <p className="mt-5 text-lg leading-8 text-foam/82">
                 O Palavra de Praia transforma vocabulário em desafio: o jogador resolve anagramas em inglês com tema de praia, recebe pistas ao errar e aprende por tentativa e repetição.
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-8 grid items-center gap-6 lg:grid-cols-[1.15fr_.85fr]">
-            <ScreenshotPanel
-              src={INTERACTION_IMAGE}
-              alt="Tela real do MVP em que o jogador interage no cenário de praia para iniciar a atividade."
-              label="Entrada no jogo"
-              caption="O MVP já apresenta um cenário de praia antes do desafio de vocabulário começar."
-            />
-            <div className="rounded-lg border-2 border-sand/25 bg-ink/55 p-6 shadow-xl backdrop-blur">
-              <h3 className="font-display text-3xl font-black text-sand">O contexto vem antes da palavra</h3>
-              <p className="mt-4 text-lg leading-8 text-foam/80">
-                Em vez de uma lista fria de termos, o jogador entra em um ambiente visual de praia e encontra palavras relacionadas a esse universo. A proposta do MVP é testar se esse contexto deixa a prática menos cansativa e mais fácil de retomar.
               </p>
             </div>
           </div>
