@@ -52,17 +52,22 @@ const businessCards = [
   {
     number: "1",
     title: "MVP gratuito",
-    text: "Atrair usuários, coletar feedbacks e medir interesse.",
+    text: "O jogo pode ser acessado livremente para alcançar mais usuários, coletar feedbacks e validar a experiência.",
   },
   {
     number: "2",
-    title: "Freemium",
-    text: "Tema inicial gratuito e pacotes pagos com novos temas, fases e desafios.",
+    title: "Pague quanto quiser",
+    text: "Quem quiser apoiar o projeto pode contribuir voluntariamente pelo Itch.io, ajudando na evolução do jogo.",
   },
   {
     number: "3",
-    title: "Escolas e professores",
-    text: "Versão educacional com listas personalizadas, ranking, relatórios e uso em sala de aula.",
+    title: "Freemium no futuro",
+    text: "Após a validação, o jogo pode evoluir com novos temas, fases e pacotes de conteúdo pagos.",
+  },
+  {
+    number: "4",
+    title: "Versão educacional",
+    text: "No médio prazo, o projeto pode oferecer recursos para professores, escolas e cursos de inglês.",
   },
 ];
 
@@ -72,7 +77,7 @@ const validationItems = [
   "Se as pistas ajudam.",
   "Se o usuário jogaria novamente.",
   "Se existe interesse em novos temas.",
-  "Se alguém pagaria por uma versão expandida.",
+  "Se as pessoas apoiariam ou pagariam por uma versão expandida.",
   "Se professores ou escolas usariam como apoio educacional.",
 ];
 
@@ -82,20 +87,24 @@ const nextSteps = [
   "Tradução das palavras.",
   "Pontuação e ranking.",
   "Recursos para professores.",
-  "Teste de monetização.",
+  "Teste de monetização com apoio voluntário e versões pagas.",
 ];
 
 function ButtonLink({ href, children, variant = "primary", icon: Icon = ArrowRight }) {
   const base =
     "group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-6 py-4 text-base font-extrabold transition duration-300 focus:outline-none focus-visible:ring-4 focus-visible:ring-sand/60 sm:text-lg";
-  const styles =
-    variant === "primary"
-      ? "bg-reef text-white shadow-[0_14px_0_#9f361e,0_24px_42px_rgba(255,107,53,.38)] hover:-translate-y-1 hover:shadow-[0_18px_0_#9f361e,0_30px_46px_rgba(255,107,53,.42)]"
-      : "border-2 border-sand bg-ocean/60 text-foam shadow-[0_12px_0_rgba(245,199,107,.45)] hover:-translate-y-1 hover:bg-ocean";
+  const variants = {
+    primary:
+      "bg-reef text-white shadow-[0_14px_0_#9f361e,0_24px_42px_rgba(255,107,53,.38)] hover:-translate-y-1 hover:shadow-[0_18px_0_#9f361e,0_30px_46px_rgba(255,107,53,.42)]",
+    secondary:
+      "border-2 border-sand bg-ocean/60 text-foam shadow-[0_12px_0_rgba(245,199,107,.45)] hover:-translate-y-1 hover:bg-ocean",
+    support:
+      "bg-sand text-ink shadow-[0_14px_0_rgba(121,84,22,.55),0_24px_42px_rgba(245,199,107,.28)] hover:-translate-y-1 hover:bg-[#ffd777]",
+  };
 
   return (
     <a
-      className={`${base} ${styles}`}
+      className={`${base} ${variants[variant] ?? variants.primary}`}
       href={href}
       target={href === "#" ? undefined : "_blank"}
       rel={href === "#" ? undefined : "noreferrer"}
@@ -341,13 +350,19 @@ export default function App() {
               <p className="mt-6 max-w-2xl text-lg leading-8 text-foam/78">
                 Criado como MVP para validar se adolescentes se engajam mais no estudo de inglês quando a memorização vira desafio.
               </p>
+              <p className="mt-4 max-w-2xl rounded-lg border border-sand/35 bg-sand/12 px-5 py-4 text-base font-extrabold leading-7 text-foam">
+                O jogo é gratuito, mas quem quiser apoiar o desenvolvimento pode contribuir pelo Itch.io no modelo “pague quanto quiser”.
+              </p>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
                 <ButtonLink href={ITCH_URL} icon={Play}>
                   Jogar MVP
                 </ButtonLink>
                 <ButtonLink href={FEEDBACK_FORM_URL} variant="secondary" icon={ClipboardCheck}>
                   Responder feedback
+                </ButtonLink>
+                <ButtonLink href={ITCH_URL} variant="support" icon={Sparkles}>
+                  Apoiar no Itch.io
                 </ButtonLink>
               </div>
             </motion.div>
@@ -444,23 +459,33 @@ export default function App() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-ocean/20 bg-ocean px-4 py-2 text-sm font-black uppercase text-sand">
               <GraduationCap className="h-4 w-4" />
-              Sustentabilidade
+              Pague quanto quiser
             </div>
-            <h2 className="font-display text-5xl font-black leading-tight sm:text-6xl">Como pode virar negócio</h2>
-            <p className="mt-5 text-lg leading-8 text-ink/72">
-              O MVP atual é gratuito para validação. A monetização pode evoluir em fases, conforme os feedbacks dos usuários.
-            </p>
+            <h2 className="font-display text-5xl font-black leading-tight sm:text-6xl">Modelo de negócio</h2>
+            <div className="mt-5 space-y-4 text-lg leading-8 text-ink/72">
+              <p>
+                O Palavra de Praia está em fase de MVP e pode ser jogado gratuitamente. Nesta etapa, nosso objetivo principal é validar a proposta, coletar feedbacks e entender se existe interesse real na solução.
+              </p>
+              <p>
+                Mesmo assim, já iniciamos um primeiro teste de monetização usando o modelo “pague quanto quiser” no Itch.io. Assim, qualquer pessoa joga sem barreira de entrada e, caso queira apoiar o desenvolvimento, contribui com qualquer valor.
+              </p>
+            </div>
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {businessCards.map((card) => (
               <BusinessCard key={card.title} {...card} />
             ))}
           </div>
 
           <p className="mx-auto mt-10 max-w-4xl rounded-lg border-2 border-ocean/20 bg-ocean p-6 text-center font-display text-2xl font-black leading-tight text-foam shadow-[0_14px_0_rgba(5,46,58,.2)]">
-            A estratégia não é vender o MVP como produto final, mas usar o MVP para descobrir quem pagaria, por quê e quanto pagaria.
+            A estratégia atual é manter o acesso aberto, validar o interesse dos usuários e testar apoio financeiro voluntário antes de transformar o MVP em um produto pago.
           </p>
+          <div className="mt-8 flex justify-center">
+            <ButtonLink href={ITCH_URL} variant="support" icon={Sparkles}>
+              Apoiar no Itch.io
+            </ButtonLink>
+          </div>
         </Section>
 
         <Section id="validacao">
@@ -480,7 +505,7 @@ export default function App() {
                 src={HERO_IMAGE}
                 alt="Tela inicial real do MVP Palavra de Praia."
                 label="Tela inicial"
-                caption="A validação parte do que já existe hoje: um MVP gratuito, jogável e aberto para feedback."
+                caption="A validação parte do que já existe hoje: um MVP gratuito, jogável, aberto para feedback e com apoio voluntário no Itch.io."
                 className="mt-8"
               />
             </div>
@@ -526,17 +551,23 @@ export default function App() {
           <div className="relative overflow-hidden rounded-lg border-4 border-sand bg-ink p-8 text-center shadow-game sm:p-12">
             <div className="absolute inset-x-0 top-0 h-3 bg-[repeating-linear-gradient(90deg,#ff6b35_0_28px,#f5c76b_28px_56px,#00b8c8_56px_84px)]" />
             <h2 className="mx-auto max-w-4xl font-display text-5xl font-black leading-tight text-foam sm:text-6xl">
-              Jogue o MVP e ajude a validar a ideia
+              Jogue, responda e apoie a próxima fase
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-foam/78">
-              Cada resposta ajuda a transformar o Palavra de Praia em uma solução melhor para praticar vocabulário em inglês.
+              Cada partida, resposta e contribuição ajuda a transformar o Palavra de Praia em uma solução melhor para praticar vocabulário em inglês.
             </p>
-            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <p className="mx-auto mt-4 max-w-2xl text-lg font-extrabold leading-8 text-sand">
+              O jogo é gratuito, mas você pode apoiar o projeto pelo sistema “pague quanto quiser” no Itch.io.
+            </p>
+            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap">
               <ButtonLink href={ITCH_URL} icon={Play}>
                 Jogar MVP
               </ButtonLink>
               <ButtonLink href={FEEDBACK_FORM_URL} variant="secondary" icon={ClipboardCheck}>
                 Responder feedback
+              </ButtonLink>
+              <ButtonLink href={ITCH_URL} variant="support" icon={Sparkles}>
+                Apoiar no Itch.io
               </ButtonLink>
             </div>
           </div>
@@ -554,6 +585,9 @@ export default function App() {
             <div className="flex flex-wrap gap-3">
               <a className="rounded-full bg-foam/10 px-4 py-2 font-bold text-foam transition hover:bg-foam/18" href={ITCH_URL} target="_blank" rel="noreferrer">
                 Link do Itch.io
+              </a>
+              <a className="rounded-full bg-sand px-4 py-2 font-bold text-ink transition hover:bg-[#ffd777]" href={ITCH_URL} target="_blank" rel="noreferrer">
+                Apoiar no Itch.io
               </a>
               <a className="rounded-full bg-foam/10 px-4 py-2 font-bold text-foam transition hover:bg-foam/18" href={FEEDBACK_FORM_URL}>
                 Link de feedback
