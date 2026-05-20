@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 const ITCH_URL = "https://artusamakgames.itch.io/palavra-de-praia";
-const FEEDBACK_FORM_URL = "#";
+const FEEDBACK_FORM_URL = "https://forms.gle/uxCbew1nfQZ1mVRZ9";
 const HERO_IMAGE = "/assets/screenshot-jogo.png";
 const GAMEPLAY_IMAGE = "/assets/gameplay-dois-erros.png";
 const FIRST_HINT_IMAGE = "/assets/gameplay-um-erro.png";
