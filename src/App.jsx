@@ -341,10 +341,10 @@ export default function App() {
                 Um jogo educativo de anagramas para praticar vocabulário em inglês de forma leve, rápida e divertida.
               </p>
               <ScreenshotPanel
-                src={GAMEPLAY_IMAGE}
-                alt="Exemplo real de rodada do Palavra de Praia com anagrama, campo de resposta e pistas reveladas."
-                label="Exemplo de rodada"
-                caption="Uma rodada real do MVP: palavra embaralhada, resposta digitada e pistas depois dos erros."
+                src={HERO_IMAGE}
+                alt="Screenshot real da tela inicial do MVP Palavra de Praia."
+                label="MVP jogável"
+                caption="O MVP já está publicado no Itch.io e pode ser jogado gratuitamente."
                 className="mt-7 lg:hidden"
               />
               <p className="mt-6 max-w-2xl text-lg leading-8 text-foam/78">
@@ -498,13 +498,6 @@ export default function App() {
                   Responder feedback
                 </ButtonLink>
               </div>
-              <ScreenshotPanel
-                src={HERO_IMAGE}
-                alt="Tela inicial real do MVP Palavra de Praia."
-                label="Tela inicial"
-                caption="A validação parte do que já existe hoje: um MVP gratuito, jogável, aberto para feedback e com apoio voluntário no Itch.io."
-                className="mt-8"
-              />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
