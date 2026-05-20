@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@500;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  letter-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: "Nunito", system-ui, sans-serif;
+  background: #052e3a;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: #f5c76b;
+  color: #052e3a;
+}
+
+.floating-letter:nth-child(3n) {
+  color: rgba(245, 199, 107, 0.46);
+}
+
+.floating-letter:nth-child(4n) {
+  color: rgba(255, 107, 53, 0.42);
+}
+
+.shimmer {
+  animation: shimmer 4.8s ease-in-out infinite;
+  transform: translateX(-70%);
+}
+
+.wave-band {
+  opacity: 0.82;
+}
+
+.wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 80px;
+  background-repeat: repeat-x;
+  background-size: 240px 80px;
+}
+
+.wave-one {
+  bottom: -32px;
+  background-image: radial-gradient(120px 46px at 120px 18px, rgba(247, 255, 247, 0.95) 0 44px, transparent 45px);
+  animation: waveSlide 13s linear infinite;
+}
+
+.wave-two {
+  bottom: -42px;
+  background-image: radial-gradient(120px 46px at 120px 18px, rgba(0, 184, 200, 0.55) 0 44px, transparent 45px);
+  animation: waveSlide 18s linear infinite reverse;
+}
+
+@keyframes shimmer {
+  0%,
+  42% {
+    transform: translateX(-75%);
+  }
+  70%,
+  100% {
+    transform: translateX(75%);
+  }
+}
+
+@keyframes waveSlide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(240px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
