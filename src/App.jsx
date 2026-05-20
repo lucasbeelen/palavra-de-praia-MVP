@@ -354,15 +354,12 @@ export default function App() {
                 O jogo é gratuito, mas quem quiser apoiar o desenvolvimento pode contribuir pelo Itch.io no modelo “pague quanto quiser”.
               </p>
 
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <ButtonLink href={ITCH_URL} icon={Play}>
                   Jogar MVP
                 </ButtonLink>
                 <ButtonLink href={FEEDBACK_FORM_URL} variant="secondary" icon={ClipboardCheck}>
                   Responder feedback
-                </ButtonLink>
-                <ButtonLink href={ITCH_URL} variant="support" icon={Sparkles}>
-                  Apoiar no Itch.io
                 </ButtonLink>
               </div>
             </motion.div>
