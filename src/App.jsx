@@ -17,6 +17,9 @@ import {
 const ITCH_URL = "https://artusamakgames.itch.io/palavra-de-praia";
 const FEEDBACK_FORM_URL = "#";
 const HERO_IMAGE = "/assets/screenshot-jogo.png";
+const GAMEPLAY_IMAGE = "/assets/gameplay-dois-erros.png";
+const FIRST_HINT_IMAGE = "/assets/gameplay-um-erro.png";
+const INTERACTION_IMAGE = "/assets/gameplay-interacao.png";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -183,7 +186,7 @@ function HeroVisual() {
           {hasImage ? (
             <img
               src={HERO_IMAGE}
-              alt="Screenshot real do MVP Palavra de Praia mostrando a palavra embaralhada e o campo de resposta."
+              alt="Screenshot real da tela inicial do MVP Palavra de Praia."
               className="h-full w-full object-cover"
               onError={() => setHasImage(false)}
             />
@@ -214,6 +217,43 @@ function HeroVisual() {
         </div>
       </div>
     </motion.div>
+  );
+}
+
+function ScreenshotPanel({ src, alt, label, caption, className = "" }) {
+  const [hasImage, setHasImage] = useState(true);
+
+  return (
+    <motion.figure
+      className={`relative overflow-hidden rounded-[1.5rem] border-[8px] border-ink bg-ink shadow-game ${className}`}
+      whileHover={{ y: -6, rotate: 0.25 }}
+      transition={{ type: "spring", stiffness: 260, damping: 22 }}
+    >
+      <div className="flex items-center justify-between border-b-4 border-sand/80 bg-ocean px-4 py-3">
+        <div className="flex gap-2">
+          <span className="h-3 w-3 rounded-full bg-reef" />
+          <span className="h-3 w-3 rounded-full bg-sand" />
+          <span className="h-3 w-3 rounded-full bg-lagoon" />
+        </div>
+        <span className="font-display text-xs font-black uppercase text-sand sm:text-sm">{label}</span>
+      </div>
+
+      <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-ocean via-lagoon to-sand">
+        {hasImage ? (
+          <img src={src} alt={alt} className="h-full w-full object-cover" onError={() => setHasImage(false)} />
+        ) : (
+          <div className="flex h-full items-center justify-center bg-sand-noise p-6 text-center font-display text-2xl font-black text-ink">
+            Screenshot do MVP
+          </div>
+        )}
+      </div>
+
+      {caption ? (
+        <figcaption className="bg-ink px-4 py-3 text-sm font-extrabold leading-6 text-foam/82">
+          {caption}
+        </figcaption>
+      ) : null}
+    </motion.figure>
   );
 }
 
@@ -292,6 +332,13 @@ export default function App() {
               <p className="mt-7 max-w-2xl text-2xl font-extrabold leading-snug text-sand sm:text-3xl">
                 Um jogo educativo de anagramas para praticar vocabulário em inglês de forma leve, rápida e divertida.
               </p>
+              <ScreenshotPanel
+                src={GAMEPLAY_IMAGE}
+                alt="Exemplo real de rodada do Palavra de Praia com anagrama, campo de resposta e pistas reveladas."
+                label="Exemplo de rodada"
+                caption="Uma rodada real do MVP: palavra embaralhada, resposta digitada e pistas depois dos erros."
+                className="mt-7 lg:hidden"
+              />
               <p className="mt-6 max-w-2xl text-lg leading-8 text-foam/78">
                 Criado como MVP para validar se adolescentes se engajam mais no estudo de inglês quando a memorização vira desafio.
               </p>
@@ -306,7 +353,9 @@ export default function App() {
               </div>
             </motion.div>
 
-            <HeroVisual />
+            <div className="hidden lg:block">
+              <HeroVisual />
+            </div>
           </div>
           <WaveBand />
         </section>
@@ -316,15 +365,35 @@ export default function App() {
             <div className="rounded-lg border-2 border-reef/50 bg-ink/55 p-7 shadow-game backdrop-blur">
               <Eyebrow>O problema</Eyebrow>
               <h2 className="font-display text-4xl font-black text-sand sm:text-5xl">O problema</h2>
-              <p className="mt-5 text-lg leading-8 text-foam/82">
-                Adolescentes sentem tédio e frustração ao tentar memorizar vocabulário em inglês por métodos repetitivos, o que pode levar ao abandono do estudo autônomo.
-              </p>
+              <div className="mt-5 space-y-4 text-lg leading-8 text-foam/82">
+                <p>
+                  Muitos adolescentes tentam estudar inglês sozinhos, mas acabam desistindo quando o aprendizado vira apenas repetição, lista de palavras e memorização sem contexto.
+                </p>
+                <p>
+                  O problema não está só em aprender novas palavras. O desafio está em manter motivação suficiente para praticar, errar, tentar de novo e reter o vocabulário.
+                </p>
+              </div>
             </div>
             <div className="rounded-lg border-2 border-lagoon/50 bg-ink/55 p-7 shadow-game backdrop-blur">
               <Eyebrow>Nossa solução</Eyebrow>
               <h2 className="font-display text-4xl font-black text-lagoon sm:text-5xl">Nossa solução</h2>
               <p className="mt-5 text-lg leading-8 text-foam/82">
                 O Palavra de Praia transforma vocabulário em desafio: o jogador resolve anagramas em inglês com tema de praia, recebe pistas ao errar e aprende por tentativa e repetição.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 grid items-center gap-6 lg:grid-cols-[1.15fr_.85fr]">
+            <ScreenshotPanel
+              src={INTERACTION_IMAGE}
+              alt="Tela real do MVP em que o jogador interage no cenário de praia para iniciar a atividade."
+              label="Entrada no jogo"
+              caption="O MVP já apresenta um cenário de praia antes do desafio de vocabulário começar."
+            />
+            <div className="rounded-lg border-2 border-sand/25 bg-ink/55 p-6 shadow-xl backdrop-blur">
+              <h3 className="font-display text-3xl font-black text-sand">O contexto vem antes da palavra</h3>
+              <p className="mt-4 text-lg leading-8 text-foam/80">
+                Em vez de uma lista fria de termos, o jogador entra em um ambiente visual de praia e encontra palavras relacionadas a esse universo. A proposta do MVP é testar se esse contexto deixa a prática menos cansativa e mais fácil de retomar.
               </p>
             </div>
           </div>
@@ -370,6 +439,21 @@ export default function App() {
               </ol>
             </div>
           </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <ScreenshotPanel
+              src={FIRST_HINT_IMAGE}
+              alt="Exemplo real do Palavra de Praia após o primeiro erro, com a primeira letra revelada como pista."
+              label="Primeiro erro"
+              caption="No primeiro erro, o jogo revela a primeira letra para reduzir frustração e manter a tentativa ativa."
+            />
+            <ScreenshotPanel
+              src={GAMEPLAY_IMAGE}
+              alt="Exemplo real do Palavra de Praia após dois erros, com primeira e última letras reveladas."
+              label="Segundo erro"
+              caption="No segundo erro, a última letra também aparece. O erro vira orientação, não só punição."
+            />
+          </div>
         </Section>
 
         <Section id="modelo-negocio" className="bg-sand/95 text-ink">
@@ -408,6 +492,13 @@ export default function App() {
                   Responder feedback
                 </ButtonLink>
               </div>
+              <ScreenshotPanel
+                src={HERO_IMAGE}
+                alt="Tela inicial real do MVP Palavra de Praia."
+                label="Tela inicial"
+                caption="A validação parte do que já existe hoje: um MVP gratuito, jogável e aberto para feedback."
+                className="mt-8"
+              />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
