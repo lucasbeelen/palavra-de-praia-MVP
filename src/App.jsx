@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
+  Circle,
   ClipboardCheck,
   Gamepad2,
   GraduationCap,
@@ -71,22 +72,28 @@ const businessCards = [
   },
 ];
 
-const validationItems = [
-  "Se o jogo é fácil de entender.",
-  "Se a dinâmica é divertida.",
-  "Se as pistas ajudam.",
-  "Se o usuário jogaria novamente.",
-  "Se existe interesse em novos temas.",
-  "Se as pessoas apoiariam ou pagariam por uma versão expandida.",
-  "Se professores ou escolas usariam como apoio educacional.",
+const validationLearned = [
+  "A dinâmica é divertida e gera vontade de jogar de novo.",
+  "Professores e escolas enxergam potencial educacional.",
+  "Novos contextos são essenciais para o produto crescer.",
 ];
 
-const nextSteps = [
-  "Novos temas de vocabulário.",
-  "Mais fases.",
-  "Tradução das palavras.",
+const validationOpen = [
+  "Se o jogo é fácil de entender para novos usuários.",
+  "Se as pistas ajudam o suficiente.",
+  "Se as pessoas apoiariam ou pagariam por uma versão expandida.",
+  "Se o jogo se tornaria uma ferramenta regular de estudo.",
+];
+
+const nextStepsConfirmed = [
+  "Frases de exemplo com tradução para cada palavra descoberta.",
+  "Estímulo para o aluno criar frases com a palavra descoberta.",
+  "Recursos e materiais para professores.",
+];
+
+const nextStepsPlanned = [
+  "Expansão para novos contextos da realidade dos usuários.",
   "Pontuação e ranking.",
-  "Recursos para professores.",
   "Teste de monetização com apoio voluntário e versões pagas.",
 ];
 
@@ -378,10 +385,10 @@ export default function App() {
               <h2 className="font-display text-4xl font-black text-sand sm:text-5xl">O problema</h2>
               <div className="mt-5 space-y-4 text-lg leading-8 text-foam/82">
                 <p>
-                  Muitos adolescentes tentam estudar inglês sozinhos, mas acabam desistindo quando o aprendizado vira apenas repetição, lista de palavras e memorização sem contexto.
+                  Muitos adolescentes tentam estudar inglês sozinhos, mas acabam desistindo quando a prática vira repetição mecânica, listas soltas de palavras e exercícios pouco conectados ao uso real do idioma.
                 </p>
                 <p>
-                  O problema não está só em aprender novas palavras. O desafio está em manter motivação suficiente para praticar, errar, tentar de novo e reter o vocabulário.
+                  O desafio não é apenas decorar vocabulário: é manter motivação para praticar, errar, tentar de novo e associar cada palavra a um contexto que faça sentido.
                 </p>
               </div>
             </div>
@@ -389,7 +396,7 @@ export default function App() {
               <Eyebrow>Nossa solução</Eyebrow>
               <h2 className="font-display text-4xl font-black text-lagoon sm:text-5xl">Nossa solução</h2>
               <p className="mt-5 text-lg leading-8 text-foam/82">
-                O Palavra de Praia transforma vocabulário em desafio: o jogador resolve anagramas em inglês com tema de praia, recebe pistas ao errar e aprende por tentativa e repetição.
+                O Palavra de Praia começa com um contexto familiar e visual: o universo da praia. O jogador resolve anagramas em inglês, recebe pistas progressivas ao errar e pratica vocabulário de forma leve. A partir da validação, o projeto pode evoluir para frases contextualizadas, novos temas e atividades que estimulem o uso ativo das palavras.
               </p>
             </div>
           </div>
@@ -486,54 +493,95 @@ export default function App() {
         </Section>
 
         <Section id="validacao">
-          <div className="grid gap-10 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
+            <Eyebrow>Pesquisa com usuários</Eyebrow>
+            <h2 className="font-display text-5xl font-black leading-tight text-sand sm:text-6xl">
+              O que estamos validando
+            </h2>
+          </div>
+
+          <div className="grid gap-8 lg:grid-cols-2">
             <div>
-              <Eyebrow>Pesquisa com usuários</Eyebrow>
-              <h2 className="font-display text-5xl font-black leading-tight text-sand sm:text-6xl">
-                O que estamos validando
-              </h2>
-              <p className="mt-5 text-xl font-bold text-foam/80">Queremos descobrir:</p>
-              <div className="mt-8">
-                <ButtonLink href={FEEDBACK_FORM_URL} icon={ClipboardCheck}>
-                  Responder feedback
-                </ButtonLink>
+              <h3 className="mb-5 font-display text-2xl font-black text-lagoon">O que já aprendemos</h3>
+              <div className="grid gap-4">
+                {validationLearned.map((item) => (
+                  <motion.div
+                    key={item}
+                    className="flex items-start gap-4 rounded-lg border-2 border-lagoon/30 bg-lagoon/10 p-5 backdrop-blur"
+                    whileHover={{ x: 6 }}
+                  >
+                    <BadgeCheck className="mt-1 h-6 w-6 shrink-0 text-lagoon" />
+                    <p className="text-lg font-bold leading-7 text-foam/84">{item}</p>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              {validationItems.map((item) => (
-                <motion.div
-                  key={item}
-                  className="flex min-h-24 items-start gap-4 rounded-lg border-2 border-foam/14 bg-foam/[0.08] p-5 backdrop-blur"
-                  whileHover={{ x: 6 }}
-                >
-                  <BadgeCheck className="mt-1 h-6 w-6 shrink-0 text-sand" />
-                  <p className="text-lg font-bold leading-7 text-foam/84">{item}</p>
-                </motion.div>
-              ))}
+            <div>
+              <h3 className="mb-5 font-display text-2xl font-black text-sand">O que ainda queremos descobrir</h3>
+              <div className="grid gap-4">
+                {validationOpen.map((item) => (
+                  <motion.div
+                    key={item}
+                    className="flex items-start gap-4 rounded-lg border-2 border-foam/14 bg-foam/[0.08] p-5 backdrop-blur"
+                    whileHover={{ x: 6 }}
+                  >
+                    <Circle className="mt-1 h-6 w-6 shrink-0 text-sand/60" />
+                    <p className="text-lg font-bold leading-7 text-foam/84">{item}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <ButtonLink href={FEEDBACK_FORM_URL} icon={ClipboardCheck}>
+              Responder feedback
+            </ButtonLink>
           </div>
         </Section>
 
         <Section id="proximos-passos" className="pb-8">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto mb-10 max-w-3xl text-center">
             <Eyebrow>Depois da validação</Eyebrow>
             <h2 className="font-display text-5xl font-black leading-tight text-sand sm:text-6xl">Próximos passos</h2>
             <p className="mt-5 text-lg leading-8 text-foam/78">
-              Com base nos feedbacks, vamos decidir quais caminhos priorizar:
+              Os primeiros testes confirmaram o que priorizar. Algumas direções já estão definidas; outras ainda estão em avaliação.
             </p>
           </div>
 
-          <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {nextSteps.map((step) => (
-              <motion.div
-                key={step}
-                className="rounded-lg border-2 border-sand/25 bg-ink/50 p-5 text-center font-display text-2xl font-black text-foam shadow-[0_12px_0_rgba(245,199,107,.16)]"
-                whileHover={{ y: -6, rotate: 0.5 }}
-              >
-                {step}
-              </motion.div>
-            ))}
+          <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
+            <div>
+              <h3 className="mb-5 font-display text-2xl font-black text-lagoon">Definido para a próxima versão</h3>
+              <div className="grid gap-4">
+                {nextStepsConfirmed.map((step) => (
+                  <motion.div
+                    key={step}
+                    className="flex items-start gap-4 rounded-lg border-2 border-lagoon/30 bg-lagoon/10 p-5 backdrop-blur"
+                    whileHover={{ x: 6 }}
+                  >
+                    <BadgeCheck className="mt-1 h-6 w-6 shrink-0 text-lagoon" />
+                    <p className="text-lg font-bold leading-7 text-foam/84">{step}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="mb-5 font-display text-2xl font-black text-sand">Em avaliação</h3>
+              <div className="grid gap-4">
+                {nextStepsPlanned.map((step) => (
+                  <motion.div
+                    key={step}
+                    className="flex items-start gap-4 rounded-lg border-2 border-foam/14 bg-foam/[0.08] p-5 backdrop-blur"
+                    whileHover={{ x: 6 }}
+                  >
+                    <Circle className="mt-1 h-6 w-6 shrink-0 text-sand/60" />
+                    <p className="text-lg font-bold leading-7 text-foam/84">{step}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </Section>
 
